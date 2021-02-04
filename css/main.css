@@ -1,0 +1,35 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+#tube-wrapper {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.tube {
+  width: 14%;
+  margin: 0 1.33%;
+  float: left;
+}
+
+.tube-part {
+  margin: 0 auto;
+  background-color: gray;
+  height: 50px;
+}
+
+.upside {
+  width: 100%;
+
+}
+
+.centerside {
+  width: 75%;
+
+}
+
+.downside {
+  width: 50%;
+}
