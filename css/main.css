@@ -148,12 +148,26 @@ body {
   vertical-align: middle;
 }
 
+@keyframes rotating {
+  from {transform: rotateZ(0deg)}
+  to {transform: rotateZ(360deg)}
+}
+
+.active-wheel-clockwise {
+  animation: rotating 1s;
+}
+
+.inner-wheel {
+  transition: transform 1s;
+}
+
 .fitting-line {
   position: relative;
   z-index: 2;
   width: 5000px;
 }
-#line-up {
+#line-up,
+#line-down {
   left: -70px;
 }
 
