@@ -18,7 +18,8 @@ $(function(){
   $(".tube").mouseenter(function(){
     $(this).children(".upside").first().addClass("hovered-tube");
     let offset = $("#burger").offset().left - $(this).offset().left;
-    $("#burger").animate({"left": "-=" + offset + "px" }, 1000);
+    console.log(offset)
+    $("#burger").animate({"left": $(this).offset().left + "px" }, 1000);
     if (offset<0)
       angle += 90;
     else
