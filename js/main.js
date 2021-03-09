@@ -13,6 +13,7 @@ $(function(){
 
   $(".upside").bind("animationend", function(){
     $(this).removeClass("active-tube");
+    $(this).parent().children(".component").first().animate({"top": "200px"}, 500)
   });
 
   $(".tube").mouseenter(function(){

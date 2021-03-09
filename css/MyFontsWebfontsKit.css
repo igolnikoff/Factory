@@ -1,0 +1,28 @@
+/**
+ * @license
+ * MyFonts Webfont Build ID 4022798, 2021-03-04T09:31:29-0500
+ * 
+ * The fonts listed in this notice are subject to the End User License
+ * Agreement(s) entered into by the website owner. All other parties are 
+ * explicitly restricted from using the Licensed Webfonts(s).
+ * 
+ * You may obtain a valid license at the URLs below.
+ * 
+ * Webfont: Pico-Regular by d[esign]
+ * URL: https://www.myfonts.com/fonts/design/pico/regular/
+ * Copyright: &amp;#x00A9; (2009&amp;#x2013;2016) Domenico Mazza. Do not redistribute or modify any components of this font.
+ * 
+ * 
+ * 
+ * © 2021 MyFonts Inc
+*/
+
+
+/* @import must be at top of file, otherwise CSS will not work */
+@import url("//hello.myfonts.net/count/3d620e");
+  
+@font-face {
+  font-family: "Pico-Regular";
+  src: url('webFonts/PicoRegular/font.woff2') format('woff2'), url('webFonts/PicoRegular/font.woff') format('woff');
+}
+
