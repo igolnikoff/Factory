@@ -8,12 +8,25 @@ $(function(){
     $(".hovered-tube").first().removeClass("hovered-tube");
     $(".active-tube").first().removeClass("active-tube");
     $(this).children(".upside").first().addClass('active-tube');
+    let tube = $(this).children(".upside").first();
+    $(tube).animate({"height": "160px"}, 40);
+
+      // function()
+      // {
+      //   $(this).animate({"height": "300px"}, 300);
+      // });
+      setTimeout(function(){$(tube).animate({"height": "300px"}, 100, function(){
+        let component = $(this).parent().children(".component").first();
+        setTimeout(function(){
+          component.animate({"top": "200px"}, 500)}, 200);
+          setTimeout(function(){$(tube).animate({"height": "200px"}, 80)}, 1000);
+      })}, 700);
 
   });
 
   $(".upside").bind("animationend", function(){
     $(this).removeClass("active-tube");
-    $(this).parent().children(".component").first().animate({"top": "200px"}, 500)
+
   });
 
   $(".tube").mouseenter(function(){

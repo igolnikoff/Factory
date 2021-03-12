@@ -1,7 +1,7 @@
 @font-face {
   font-family: a_LCDNova;
-  src: url("../3574.ttf");
-  src: local(a_LCDNova), url("../3574.ttf");
+  src: url(3574.ttf);
+  src: local(a_LCDNova), url(3574.ttf);
 
 }
 
@@ -33,15 +33,15 @@ body {
 }
 
 .active-tube {
-  animation: spring 1s;
+  /* animation: spring 1s; */
 }
 
 @keyframes spring {
   0% {height: 200px;}
   25% {height: 160px;}
-  /* 50% {height: 200px;} */
-  100% {height: 300px;}
-  /* 100% {height: 200px;} */
+  50% {height: 200px;}
+  75% {height: 300px;}
+  100% {height: 200px;}
 }
 
 .tube-part {
@@ -196,6 +196,8 @@ body {
 .component {
   display: block;
   margin: 0 auto;
-  top: -50px;
+  top: -70px;
   position: relative;
+  width: 90%;
+
 }
