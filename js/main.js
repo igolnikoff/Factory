@@ -18,8 +18,10 @@ $(function(){
       setTimeout(function(){$(tube).animate({"height": "300px"}, 100, function(){
         let component = $(this).parent().children(".component").first();
         setTimeout(function(){
-          component.animate({"top": "200px"}, 500)}, 200);
-          setTimeout(function(){$(tube).animate({"height": "200px"}, 80)}, 1000);
+          let burgerTop =  $("#burger").offset().top - component.offset().top - parseInt(component.css("top")) - parseInt (component.css("height"));
+          component.animate({"top": "+=" + burgerTop + "px"}, 500)}, 200);
+
+          setTimeout(function(){$(tube).animate({"height": "200px"}, 80)}, 300);
       })}, 700);
 
   });
@@ -32,7 +34,6 @@ $(function(){
   $(".tube").mouseenter(function(){
     $(this).children(".upside").first().addClass("hovered-tube");
     let offset = $("#burger").offset().left - $(this).offset().left;
-    console.log(offset)
     $("#burger").animate({"left": $(this).offset().left + "px" }, 1000);
     if (offset<0)
       angle += 90;
