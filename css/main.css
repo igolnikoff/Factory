@@ -193,6 +193,14 @@ body {
   left: 2%;
 }
 
+#burger img {
+  display: block;
+}
+
+.flat {
+  position: relative;
+}
+
 .component {
   display: block;
   margin: 0 auto;

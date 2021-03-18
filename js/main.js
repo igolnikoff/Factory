@@ -1,5 +1,13 @@
 $(function(){
   let angle = 0;
+  let level = 1;
+  let component_offsets = new Map([
+    ["meat", 5],
+    ["salad", -5],
+    ["cheese", -20],
+    ["tomato", 8],
+    ["bread-up", 5]
+  ]);
 
   let fitting_offset = $(".tube").last().offset().left - $("#burger").offset().left;
   $("#line-up").css ("left", (- fitting_offset - 50) + "px")
@@ -11,16 +19,22 @@ $(function(){
     let tube = $(this).children(".upside").first();
     $(tube).animate({"height": "160px"}, 40);
 
-      // function()
-      // {
-      //   $(this).animate({"height": "300px"}, 300);
-      // });
       setTimeout(function(){$(tube).animate({"height": "300px"}, 100, function(){
         let component = $(this).parent().children(".component").first();
         setTimeout(function(){
+        let top_offset = $("#burger img").first().offset().top - component.offset().top - parseInt(component.css("top")) - parseInt (component.css("height")) - component_offsets.get(component.attr("id"));
           let burgerTop =  $("#burger").offset().top - component.offset().top - parseInt(component.css("top")) - parseInt (component.css("height"));
-          component.animate({"top": "+=" + burgerTop + "px"}, 500)}, 200);
-
+          console.log(top_offset, burgerTop)
+          component.animate({"top": "+=" + top_offset + "px", "width": $("#burger img").width() + "px"}, 500)}, 200);
+          console.log();
+          component.css("z-index", level)
+          setTimeout(function()
+          {
+            let top_offset = $("#burger img").first().offset().top - component.offset().top - parseInt(component.css("top")) - parseInt (component.css("height")) - component_offsets.get(component.attr("id"));
+            $("#burger").children("img").first().before($("<img>", {"src": $(component).attr("src"), "class": "flat"}).css({"top": top_offset + "px", "z-index": level}))
+            level += 1;
+            component.css("top", "-70px");
+          }, 800);
           setTimeout(function(){$(tube).animate({"height": "200px"}, 80)}, 300);
       })}, 700);
 
@@ -33,8 +47,9 @@ $(function(){
 
   $(".tube").mouseenter(function(){
     $(this).children(".upside").first().addClass("hovered-tube");
-    let offset = $("#burger").offset().left - $(this).offset().left;
-    $("#burger").animate({"left": $(this).offset().left + "px" }, 1000);
+    let width_diff = Math.abs($("#burger img").width() - $(this).width());
+    let offset = $("#burger").offset().left - $(this).offset().left + width_diff / 2;
+    $("#burger").animate({"left": ($(this).offset().left + width_diff / 2) + "px" }, 1000);
     if (offset<0)
       angle += 90;
     else
