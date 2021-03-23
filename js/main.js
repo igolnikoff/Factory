@@ -3,11 +3,13 @@ $(function(){
   let level = 1;
   let component_offsets = new Map([
     ["meat", 5],
-    ["salad", -5],
-    ["cheese", -20],
+    ["salad", 25],
+    ["cheese", 20],
     ["tomato", 8],
     ["bread-up", 5]
   ]);
+
+  let current_components = new Array();
 
   let fitting_offset = $(".tube").last().offset().left - $("#burger").offset().left;
   $("#line-up").css ("left", (- fitting_offset - 50) + "px")
@@ -22,7 +24,7 @@ $(function(){
       setTimeout(function(){$(tube).animate({"height": "300px"}, 100, function(){
         let component = $(this).parent().children(".component").first();
         setTimeout(function(){
-        let top_offset = $("#burger img").first().offset().top - component.offset().top - component.height() + component_offsets.get(component.attr("id"));
+        let top_offset = $("#burger img").first().offset().top - component.offset().top + parseInt(component.css("top")) + component_offsets.get(component.attr("id"));
           let burgerTop =  $("#burger").offset().top - component.offset().top - parseInt(component.css("top")) - parseInt (component.css("height"));
           console.log(top_offset, burgerTop)
           component.animate({"top": "+=" + top_offset + "px", "width": $("#burger img").width() + "px"}, 500)}, 200);
@@ -31,10 +33,16 @@ $(function(){
           setTimeout(function()
           {
             //let top_offset = $("#burger img").first().offset().top - component.offset().top - parseInt(component.css("top")) - parseInt (component.css("height")) - component_offsets.get(component.attr("id"));
-            // определить положение новой картинки в бургере
-            $("#burger").children("img").first().before($("<img>", {"src": $(component).attr("src"), "class": "flat"}).css({"top": top_offset + "px", "z-index": level}))
+            //
+            let add_offset = component_offsets.get(component.attr("id"));
+            for (prev_component of current_components)
+            {
+              add_offset += component_offsets.get(prev_component);
+            }
+            $("#burger").children("img").first().before($("<img>", {"src": $(component).attr("src"), "class": "flat"}).css({"top": add_offset + "px", "z-index": level}))
+            current_components.push($(component).attr("id"))
             level += 1;
-            component.css("top", "-70px");
+            component.css({"top": "-70px", "z-index": 1});
           }, 800);
           setTimeout(function(){$(tube).animate({"height": "200px"}, 80)}, 300);
       })}, 700);
