@@ -191,6 +191,7 @@ body {
 #burger {
   position: relative;
   left: 2%;
+  display: inline-block;
 }
 
 #burger img {
@@ -199,6 +200,8 @@ body {
 
 .flat {
   position: relative;
+  display: block;
+  margin: 0 auto;
 }
 
 .component {

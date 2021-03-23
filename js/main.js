@@ -4,7 +4,7 @@ $(function(){
   let component_offsets = new Map([
     ["meat", 5],
     ["salad", 25],
-    ["cheese", 20],
+    ["cheese", 25],
     ["tomato", 8],
     ["bread-up", 5]
   ]);
