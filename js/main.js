@@ -42,7 +42,7 @@ $(function(){
             $("#burger").children("img").first().before($("<img>", {"src": $(component).attr("src"), "class": "flat"}).css({"top": add_offset + "px", "z-index": level}))
             current_components.push($(component).attr("id"))
             level += 1;
-            component.css({"top": "-70px", "z-index": 1});
+            component.css({"top": "-70px", "z-index": 1, "width": $(tube).width() + "px"});
           }, 800);
           setTimeout(function(){$(tube).animate({"height": "200px"}, 80)}, 300);
       })}, 700);
