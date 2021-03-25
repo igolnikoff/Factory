@@ -69,8 +69,7 @@ body {
 }
 
 .hovered-tube {
-  height: 240px;
-
+  height: 240px !important;
 }
 
 .centerside {

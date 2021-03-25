@@ -23,23 +23,20 @@ $(function(){
     $(".active-tube").first().removeClass("active-tube");
     $(this).children(".upside").first().addClass('active-tube');
     let tube = $(this).children(".upside").first();
-    $(tube).animate({"height": "160px"}, 40);
-
-      setTimeout(function(){$(tube).animate({"height": "300px"}, 100, function(){
+    $(tube).animate({"height": "160px"}, 40).animate({"height": "300px"}, 100, function(){
         let component = $(this).parent().children(".component").first();
         if(component.attr("id") == "bread-up")
         {
           is_game_finished = true;
         }
-        setTimeout(function(){
+
         let top_offset = $("#burger img").first().offset().top - component.offset().top + parseInt(component.css("top")) + component_offsets.get(component.attr("id"));
           let burgerTop =  $("#burger").offset().top - component.offset().top - parseInt(component.css("top")) - parseInt (component.css("height"));
-          console.log(top_offset, burgerTop)
-          component.animate({"top": "+=" + top_offset + "px", "width": $("#burger img").width() + "px"}, 500)}, 200);
-          console.log();
-          setTimeout(function(){component.css("z-index", level)}, 300);
-          setTimeout(function()
+          component.animate({"top": "+=" + top_offset + "px", "width": $("#burger img").width() + "px"}, 500)}, 200, function()
+
           {
+            component.css("z-index", level);
+
             //let top_offset = $("#burger img").first().offset().top - component.offset().top - parseInt(component.css("top")) - parseInt (component.css("height")) - component_offsets.get(component.attr("id"));
             //
             let add_offset = component_offsets.get(component.attr("id"));
@@ -51,9 +48,9 @@ $(function(){
             current_components.push($(component).attr("id"))
             level += 1;
             component.css({"top": "-70px", "z-index": 1, "width": "90%"});
-          }, 800);
-          setTimeout(function(){$(tube).animate({"height": "200px"}, 80)}, 300);
-      })}, 700);
+          });
+
+      }).animate({"height": "200px"}, 80);
 
   });
 
