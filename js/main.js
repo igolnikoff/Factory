@@ -11,6 +11,7 @@ $(function(){
 
   let current_components = new Array();
   let is_game_finished = false;
+  let is_burger_moving = false;
 
   let fitting_offset = $(".tube").last().offset().left - $("#burger").offset().left;
   $("#line-up").css ("left", (- fitting_offset - 50) + "px")
@@ -63,6 +64,8 @@ $(function(){
 
   function move_burger(new_position)
   {
+    if(is_burger_moving) return;
+    is_burger_moving = true;
     let offset = $("#burger img").offset().left - new_position;
     $("#burger").animate({"left": "-=" + offset + "px" }, 1000);
     if (offset<0)
@@ -71,7 +74,10 @@ $(function(){
       angle -= 90;
     $(".inner-wheel").css({"transform": "rotateZ("+angle+"deg)"});
     $("#line-up").animate({"left": "-=" + offset + "px" }, 1000);
-    $("#line-down").animate({"left": "+=" + offset + "px" }, 1000);
+    $("#line-down").animate({"left": "+=" + offset + "px" }, 1000, function()
+    {
+      is_burger_moving = false;
+    });
   }
 
 
