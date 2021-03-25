@@ -1,8 +1,18 @@
 @font-face {
-  font-family: a_LCDNova;
-  src: url(3574.ttf);
-  src: local(a_LCDNova), url(3574.ttf);
+  font-family: '3574';
+  src: url('3574.eot');
+  src: url('3574.eot?#iefix') format('embedded-opentype');
+  font-weight: normal;
+  font-style: normal;
+}
 
+@font-face {
+  font-family: 'a_LCDNova';
+  src: url('a_LCDNova.svg#a_LCDNova') format('svg'),
+       url('a_LCDNova.ttf') format('truetype'),
+       url('a_LCDNova.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
 
 * {
