@@ -15,6 +15,13 @@
   font-style: normal;
 }
 
+@import url("//hello.myfonts.net/count/3d620e");
+
+@font-face {
+  font-family: "Pico-Regular";
+  src: url('webFonts/PicoRegular/font.woff2') format('woff2'), url('webFonts/PicoRegular/font.woff') format('woff');
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -24,7 +31,51 @@ body {
   background-color: #E0E266;
 }
 
-#tube-wrapper {
+#result {
+  display: none;
+  opacity: 0;
+}
+
+#result p {
+  font-family: "Pico-Regular";
+  text-align: center;
+}
+
+#caption {
+  font-size: 39px;
+  margin-top: 50px;
+}
+
+#score-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+#score {
+  display: inline-block;
+  position: relative;
+}
+
+.points {
+  font-size: 250px;
+}
+
+#points-1 {
+  color: #821AD3;
+}
+
+#points-2 {
+  color: #C545E1;
+  position: absolute;
+  left: 16px;
+  top: 0px;
+}
+
+#skill {
+  font-size: 27px;
+}
+
+.tube-wrapper {
   width: 90%;
   margin: 0 auto;
 }
@@ -39,7 +90,7 @@ body {
 
 
 .tube:hover .screen p {
-  color: #94e411;
+  color: #2BF588;
 }
 
 .active-tube {
@@ -100,7 +151,7 @@ body {
 
 .screen p {
   font-family: a_LCDNova;
-  color: #E2E445;
+  color: #5EE500;
   font-size: 16px;
   width: 100%;
   text-align: center;
