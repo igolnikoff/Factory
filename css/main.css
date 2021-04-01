@@ -27,6 +27,11 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 90%;
 }
 
 body {
@@ -36,6 +41,10 @@ body {
 #result {
   display: none;
   opacity: 0;
+  width: 50%;
+  height: 100%;
+  justify-content: center;
+  flex-direction: column;
 }
 
 #result p {
@@ -59,7 +68,7 @@ body {
 }
 
 .points {
-  font-size: 250px;
+  font-size: 320px;
 }
 
 #points-1 {
@@ -77,22 +86,84 @@ body {
   font-size: 27px;
 }
 
-#retry {
-  width: 120px;
-  height: 45px;
+.button {
+  width: 180px;
+  height: 90px;
   margin: 50px auto 0;
   background-image: url("../img/retry.svg");
   background-repeat: no-repeat;
+  background-size: 100%;
+  cursor: pointer;
+
+
 }
 
-#retry p {
+#play {
+  margin-top: 90px;
+}
+
+.button p {
   text-align: center;
-  line-height: 43px;
+  line-height: 65px;
+  font-size: 25px;
+  font-family: "Pico-Regular";
+}
+
+#start-screen {
+  display: flex;
+  height: 100%;
+}
+
+.app-name {
+  text-align: center;
+  font-family: "Pico-Regular";
+  font-size: 220px;
+  line-height: 160px;
+}
+
+#name-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+#name {
+  display: inline-block;
+  position: relative;
+}
+
+
+#app-name {
+  color: #821AD3;
+
+}
+
+#app-name-2 {
+  color: #C545E1;
+  position: absolute;
+  top: 0;
+  left: 11px;
+}
+
+.screen-part {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#video {
+  width: 70%;
+  display: block;
+  margin: 0 auto;
+  outline: none;
+  box-shadow: 0px 0px 41.0967px rgba(0, 0, 0, 0.25);
 }
 
 .tube-wrapper {
   width: 90%;
   margin: 0 auto;
+  display: none;
+  opacity: 0;
 }
 
 .tube {
@@ -158,7 +229,6 @@ body {
 
 .screen {
   width: 35%;
-  height: 20%;
   border: 4px solid black;
   background-color: #272626;
   margin: 6% auto;
@@ -266,7 +336,8 @@ body {
 #burger {
   position: relative;
   left: 2%;
-  display: inline-block;
+  display: none;
+  opacity: 0;
 }
 
 #burger img {
@@ -282,7 +353,7 @@ body {
 .component {
   display: block;
   margin: 0 auto;
-  top: -70px;
+  top: -50px;
   position: relative;
   width: 90%;
 

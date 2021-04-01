@@ -11,7 +11,6 @@ $(function(){
 
   let current_components = new Array();
   let is_game_finished = false;
-  let is_burger_moving = false;
 
   let scores = 150;
   let skills = new Map([
@@ -53,6 +52,7 @@ $(function(){
             component.css("z-index", level);
 
             scores += calories.get(component.attr("id"));
+            console.log(calories.get(component.attr("id")));
             let add_offset = component_offsets.get(component.attr("id"));
             for (prev_component of current_components)
             {
@@ -61,7 +61,7 @@ $(function(){
             $("#burger").children("img").first().before($("<img>", {"src": $(component).attr("src"), "class": "flat"}).css({"top": add_offset + "px", "z-index": level}))
             current_components.push($(component).attr("id"))
             level += 1;
-            component.css({"top": "-70px", "z-index": 1, "width": "90%"});
+            component.css({"top": "-50px", "z-index": 1, "width": "90%"});
           });
 
       }).delay(200).animate({"height": "200px"}, 80, function(){
@@ -81,16 +81,46 @@ $(function(){
         move_burger(new_position);
         $(".tube-wrapper").animate ({"opacity": 0}, 200, function(){
           $(this).css("display", "none");
-          $("#result").css("display", "block");
+          $("#result").css("display", "flex");
           $("#result").animate({"opacity": 1}, 200, function(){
             $("#burger").css("left", - $("#burger").width() + "px");
-            let new_position = ($("body").width() - $("#burger").width()) / 2;
+            let new_position = $("body").width() * 3 / 4 - $("#burger").width() / 2;
             move_burger(new_position);
 
           });
         });
       });
 
+  });
+
+  $("#play").click(function(){
+    $("#start-screen").animate({"opacity": 0}, 200, function(){
+      $(this).css("display", "none");
+      $(".tube-wrapper").css("display", "block").animate({"opacity": 1}, 200);
+      $("#burger").css("display", "inline-block").animate({"opacity": 1}, 200);
+    })
+  })
+
+  $("#retry").click(function(){
+    $("#result").animate({"opacity": 0}, 200, function()
+      {
+        $(this).css("display", "none");
+        $(".tube-wrapper").css("display", "block").animate({"opacity": 1}, 200);
+        scores = 150;
+        level = 1;
+        current_components = [];
+        let new_position = $("body").width() + 50;
+        move_burger(new_position);
+        is_game_finished = false;
+        let component_images = $("#burger img");
+        component_images = component_images.slice(0, component_images.length - 1);
+        for(let image of component_images)
+        {
+          image.remove();
+        }
+        $("#burger").css("left", - $("#burger").width() + "px");
+        move_burger($("body").width() * 0.02);
+      });
   });
 
   $(".upside").bind("animationend", function(){
