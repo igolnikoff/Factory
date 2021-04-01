@@ -84,7 +84,7 @@ $(function(){
           $("#result").css("display", "block");
           $("#result").animate({"opacity": 1}, 200, function(){
             $("#burger").css("left", - $("#burger").width() + "px");
-            let new_position = ($("body").width() - $("#score").width()) / 2;
+            let new_position = ($("body").width() - $("#burger").width()) / 2;
             move_burger(new_position);
 
           });
@@ -101,7 +101,7 @@ $(function(){
   function move_burger(new_position)
   {
 
-    let offset = $("#burger img").offset().left - new_position;
+    let offset = $("#burger").offset().left - new_position;
     $("#burger").stop(true, false).animate({"left": "-=" + offset + "px" }, 1000);
     if (offset<0)
       angle += 90;

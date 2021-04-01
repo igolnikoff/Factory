@@ -19,7 +19,9 @@
 
 @font-face {
   font-family: "Pico-Regular";
-  src: url('webFonts/PicoRegular/font.woff2') format('woff2'), url('webFonts/PicoRegular/font.woff') format('woff');
+  src: url('MyFontsWebfontsKit-2/webFonts/PicoRegular/font.woff2') format('woff2'),
+  url('MyFontsWebfontsKit-2/webFonts/PicoRegular/font.woff') format('woff'),
+  url('MyFontsWebfontsKit-2/webFonts/PicoRegular/d[esign] - Pico Regular.ttf') format('truetype');
 }
 
 * {
@@ -73,6 +75,19 @@ body {
 
 #skill {
   font-size: 27px;
+}
+
+#retry {
+  width: 120px;
+  height: 45px;
+  margin: 50px auto 0;
+  background-image: url("../img/retry.svg");
+  background-repeat: no-repeat;
+}
+
+#retry p {
+  text-align: center;
+  line-height: 43px;
 }
 
 .tube-wrapper {
