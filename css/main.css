@@ -90,7 +90,7 @@ body {
   width: 180px;
   height: 90px;
   margin: 50px auto 0;
-  background-image: url("../img/retry.svg");
+  background-image: url("../img/retry_btn.svg");
   background-repeat: no-repeat;
   background-size: 100%;
   cursor: pointer;
