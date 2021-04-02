@@ -228,7 +228,7 @@ body {
 }
 
 .screen {
-  width: 35%;
+  width: 50%;
   border: 4px solid black;
   background-color: #272626;
   margin: 6% auto;
@@ -356,5 +356,26 @@ body {
   top: -50px;
   position: relative;
   width: 90%;
+
+}
+
+@media screen and (max-width: 1200px) {
+  #start-screen {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .screen-part {
+    width: 100%;
+  }
+
+  #video {
+    margin-top: 100px;
+  }
+
+  .tube {
+    min-width: 140px;
+  }
+
 
 }
