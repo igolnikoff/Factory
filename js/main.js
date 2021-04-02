@@ -96,6 +96,7 @@ $(function(){
   $("#play").click(function(){
     $("#start-screen").animate({"opacity": 0}, 200, function(){
       $(this).css("display", "none");
+      $("#tubes").css("display", "flex");
       $(".tube-wrapper").css("display", "block").animate({"opacity": 1}, 200);
       $("#burger").css("display", "inline-block").animate({"opacity": 1}, 200);
     })
