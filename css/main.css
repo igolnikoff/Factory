@@ -160,6 +160,7 @@ body {
 }
 
 #tubes {
+  height: 100%;
   width: 100%;
   min-width: 1000px;
   display: none;
@@ -168,6 +169,7 @@ body {
 
 .tube-wrapper {
   width: 20%;
+  height: 100%;
   margin: 0 3%;
   display: none;
   opacity: 0;
@@ -175,6 +177,7 @@ body {
 
 .tube {
   width: 60%;
+  height: 100%;
   margin: 0 5%;
   float: left;
   cursor: pointer;
@@ -206,7 +209,7 @@ body {
 
 .upside {
   width: 20%;
-  height: 200px;
+  height: 20%;
   background-color: #A5A5A5;
   border-left: 6px solid black;
   border-right: 6px solid black;
@@ -366,6 +369,14 @@ body {
   width: 90%;
 
 }
+
+@media screen and (max-width: 1400px) {
+  .app-name {
+    font-size: 160px;
+    line-height: 100px;
+  }
+}
+
 @media screen and (max-width: 1200px) {
     .app-name {
       font-size: 120px;
