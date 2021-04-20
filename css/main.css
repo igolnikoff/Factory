@@ -160,7 +160,7 @@ body {
 }
 
 #tubes {
-  height: 100%;
+  height: 50%;
   width: 100%;
   min-width: 1000px;
   display: none;
@@ -209,7 +209,7 @@ body {
 
 .upside {
   width: 20%;
-  height: 20%;
+  height: 70%;
   background-color: #A5A5A5;
   border-left: 6px solid black;
   border-right: 6px solid black;
@@ -227,16 +227,23 @@ body {
 
 .downside {
   width: 100%;
-  height: 15%;
-  background-image: url("../img/tube-downside.png");
+  /* height: 15%; */
+  /* background-image: url("../img/tube-downside.png");
   background-size: 100% auto;
   background-position: top center;
-  background-repeat: no-repeat;
-  overflow: hidden;
+  background-repeat: no-repeat; */
+  /* overflow: hidden; */
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  z-index: 2;
+
+}
+
+.tube-down {
+  width: 100%;
+  position: absolute;
   z-index: 2;
 
 }
@@ -246,6 +253,8 @@ body {
   border: 4px solid black;
   background-color: #272626;
   margin: 0 auto;
+  z-index: 3;
+  position: relative;
 }
 
 .screen p {
@@ -367,8 +376,8 @@ body {
 .component {
   display: block;
   margin: 0 auto;
-  top: -50px;
-  position: relative;
+  top: 70%;
+  position: absolute;
   width: 90%;
 
 }

@@ -64,7 +64,7 @@ $(function(){
             component.css({"top": "-50px", "z-index": 1, "width": "90%"});
           });
 
-      }).delay(200).animate({"height": "200px"}, 80, function(){
+      }).delay(200).animate({"height": "75%"}, 80, function(){
         if (!is_game_finished) return;
         $("#points-1").text(scores);
         $("#points-2").text(scores);
