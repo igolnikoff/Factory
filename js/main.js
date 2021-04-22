@@ -1,4 +1,7 @@
 $(function(){
+  let wheel_height = $(".wheel").first().height();
+  console.log(wheel_height);
+  $(".wheel").css("width", wheel_height + "px");
   let angle = 0;
   let level = 1;
   let component_offsets = new Map([
