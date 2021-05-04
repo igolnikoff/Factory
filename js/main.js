@@ -1,7 +1,17 @@
 $(function(){
-  // let wheel_height = $(".wheel").first().height();
-  // console.log(wheel_height);
-  // $(".wheel").css("width", wheel_height + "px");
+  let wheel_width = $('.wheel').width() + parseInt($('.wheel').css('padding-left')) * 2 + parseInt($('.wheel').css('margin-left')) * 2;
+  let wheel_count = Math.ceil($("body").width() / wheel_width);
+  console.log(wheel_count);
+  for(let i = 0; i < wheel_count - 1; ++i)
+  {
+    $("#wheel-line").append($(".wheel").first().clone());
+  }
+
+  $("#wheel-line").append($("<div>", {"class": "clear"}))
+
+
+  let lineup_offset = $("body").width();
+  $("#line-up").css("left", - lineup_offset + "px");
   let angle = 0;
   let level = 1;
   let component_offsets = new Map([
@@ -32,7 +42,7 @@ $(function(){
     ["bread-up", 150]
   ]);
   let fitting_offset = $(".tube").last().offset().left - $("#burger").offset().left;
-  $("#line-up").css ("left", (- fitting_offset - 50) + "px")
+//  $("#line-up").css ("left", (- fitting_offset - 50) + "px")
 
   $('.tube').click(function(){
     if(is_game_finished) return;
