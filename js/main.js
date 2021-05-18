@@ -11,12 +11,14 @@ $(function(){
 
   let lineup_offset = $("body").width();
   $("#line-up").css("left", - lineup_offset + "px");
+  $("#burger").css("bottom", $("#conveyor").height());
   let angle = 0;
   let level = 1;
+  let add_offset = 0;
   let component_offsets = new Map([
     ["meat", 5],
     ["salad", 25],
-    ["cheese", 25],
+    ["cheese", 29],
     ["tomato", 8],
     ["bread-up", 5]
   ]);
@@ -52,8 +54,12 @@ $(function(){
     let tube_upside = $(this).children(".upside").first();
     $(tube_upside).animate({"height": "-=100px"}, 200).delay(200).animate({"height": "+=140px"}, 200, function(){
         let component = $(this).parent().children(".downside").first().children(".component").first();
-        component = component.clone();
-        $("#burger img").first().before(component);
+        // component = component.clone();
+        let component_img = component.children("img").first().clone();
+        $("#burger img").first().before(component_img);
+        console.log(component.offset().top);
+        let start_pos = $("#burger img").last().offset().top - component.offset().top;
+        // component_img.css("bottom", start_pos -50);
         // console.log(component);
         if(component.attr("id") == "bread-up")
         {
@@ -61,20 +67,22 @@ $(function(){
         }
 
         // let top_offset = $("#burger img").first().offset().top - component.offset().top - $("#burger").height() - component.height() - component_offsets.get(component.children("img").attr("id"));
-        let top_offset = $("#burger img").first().offset().top - component.offset().top - component.height() + component_offsets.get(component.children("img").attr("id"))
-        console.log(top_offset, $("#burger img").first().offset().top, component.offset().top, component.height(), component_offsets.get(component.children("img").attr("id")));
-        component.css("bottom", "initial");
-          component.animate({"top": "+=" + top_offset + "px", "width": $("#burger img").width() + "px"}, 3000, function()
+        // let top_offset = $("#burger img").first().offset().top - component.offset().top - component.height() + component_offsets.get(component.children("img").attr("id"))
+        // console.log(top_offset, $("#burger img").first().offset().top, component.offset().top, component.height(), component_offsets.get(component.children("img").attr("id")));
+        // component.css("bottom", "initial");
+          // component.animate({"top": "+=" + top_offset + "px", "width": $("#burger img").width() + "px"}, 3000, function()
+          component_img.css("z-index", level);
+          add_offset += component_offsets.get(component_img.attr("id"));
+          component_img.animate({"bottom": -add_offset}, 1000, function()
           {
-            component.css("z-index", level);
 
-            let component_img = component.children("img").first();
+
+
             scores += calories.get(component_img.attr("id"));
-            let add_offset = component_offsets.get(component_img.attr("id"));
-            for (prev_component of current_components)
-            {
-              add_offset += component_offsets.get(prev_component);
-            }
+            // for (prev_component of current_components)
+            // {
+            //   add_offset += component_offsets.get(prev_component);
+            // }
             // $("#burger").children("img").first().before($("<img>", {"src": $(component_img).attr("src"), "class": "flat"}).css({"top": add_offset + "px", "z-index": level}))
             current_components.push($(component_img).attr("id"))
             level += 1;
