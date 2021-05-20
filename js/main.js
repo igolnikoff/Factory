@@ -44,6 +44,10 @@ $(function(){
     ["bread-up", 150]
   ]);
   let fitting_offset = $(".tube").last().offset().left - $("#burger").offset().left;
+  function sleep(ms)
+  {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 //  $("#line-up").css ("left", (- fitting_offset - 50) + "px")
 
   $('.tube').click(function(){
@@ -72,10 +76,10 @@ $(function(){
         // console.log(top_offset, $("#burger img").first().offset().top, component.offset().top, component.height(), component_offsets.get(component.children("img").attr("id")));
         // component.css("bottom", "initial");
           // component.animate({"top": "+=" + top_offset + "px", "width": $("#burger img").width() + "px"}, 3000, function()
-          while(!is_burger_movement_finished)
-          {
-            delay(100);
-          }
+          // while(!is_burger_movement_finished)
+          // {
+            sleep(1500);
+          // }
           setTimeout(function(){component_img.css("z-index", level)}, 200);
           add_offset += component_offsets.get(component_img.attr("id"));
           component_img.animate({"bottom": -add_offset}, 1000, function()
