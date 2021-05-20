@@ -1,6 +1,7 @@
 $(function(){
   let wheel_width = $('.wheel').width() + parseInt($('.wheel').css('padding-left')) * 2 + parseInt($('.wheel').css('margin-left')) * 2;
   let wheel_count = Math.ceil($("body").width() / wheel_width);
+  let is_burger_movement_finished = true;
   for(let i = 0; i < wheel_count - 1; ++i)
   {
     $("#wheel-line").append($(".wheel").first().clone());
@@ -58,8 +59,8 @@ $(function(){
         let component_img = component.children("img").first().clone();
         $("#burger img").first().before(component_img);
         console.log(component.offset().top);
-        let start_pos = $("#burger img").last().offset().top - component.offset().top;
-        // component_img.css("bottom", start_pos -50);
+        let start_pos = $("#burger img").first().offset().top - component.offset().top;
+        component_img.css("bottom", start_pos);
         // console.log(component);
         if(component.attr("id") == "bread-up")
         {
@@ -71,7 +72,11 @@ $(function(){
         // console.log(top_offset, $("#burger img").first().offset().top, component.offset().top, component.height(), component_offsets.get(component.children("img").attr("id")));
         // component.css("bottom", "initial");
           // component.animate({"top": "+=" + top_offset + "px", "width": $("#burger img").width() + "px"}, 3000, function()
-          component_img.css("z-index", level);
+          while(!is_burger_movement_finished)
+          {
+            delay(100);
+          }
+          setTimeout(function(){component_img.css("z-index", level)}, 200);
           add_offset += component_offsets.get(component_img.attr("id"));
           component_img.animate({"bottom": -add_offset}, 1000, function()
           {
@@ -160,7 +165,10 @@ $(function(){
   {
 
     let offset = $("#burger").offset().left - new_position;
-    $("#burger").stop(true, false).animate({"left": "-=" + offset + "px" }, 1000);
+    is_burger_movement_finished = false;
+    $("#burger").stop(true, false).animate({"left": "-=" + offset + "px" }, 1000, function(){
+      is_burger_movement_finished = true;
+    });
     if (offset<0)
       angle += 90;
     else
@@ -175,8 +183,8 @@ $(function(){
   $(".tube").mouseenter(function(){
     if(is_game_finished) return;
     $(this).children(".upside").first().addClass("hovered-tube");
-    let width_diff = Math.abs($("#burger img").width() - $(this).width());
-    let new_position = $(this).offset().left + width_diff / 2;
+    let width_diff = $("#burger").width() - $(this).width();
+    let new_position = $(this).offset().left - width_diff / 2;
     move_burger(new_position);
 
 
