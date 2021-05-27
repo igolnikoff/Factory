@@ -402,6 +402,12 @@ body {
 
 }
 
+#cheese {
+  width: 70%;
+  display: block;
+  margin: 0 auto;
+}
+
 @media screen and (max-width: 1400px) {
   .app-name {
     font-size: 160px;
