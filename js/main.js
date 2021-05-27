@@ -4,6 +4,9 @@ $(function(){
   let is_burger_movement_finished = new Promise(function(resolve, reject){
     resolve();
   });
+  let is_component_movement_finished = new Promise(function(resolve, reject){
+    resolve();
+  })
   let is_component_move = false;
   for(let i = 0; i < wheel_count - 1; ++i)
   {
@@ -61,49 +64,51 @@ $(function(){
         // component = component.clone();
         let component_img = component.children("img").first().clone();
 
-        is_burger_movement_finished = is_burger_movement_finished.then(function(){
-
-          $("#burger img").first().before(component_img);
-          console.log(component.offset().top);
-          let start_pos = $("#burger img").first().offset().top - component.offset().top;
-          component_img.css("bottom", start_pos);
-          // console.log(component);
-          if(component.attr("id") == "bread-up")
-          {
-            is_game_finished = true;
-          }
-
-          // let top_offset = $("#burger img").first().offset().top - component.offset().top - $("#burger").height() - component.height() - component_offsets.get(component.children("img").attr("id"));
-          // let top_offset = $("#burger img").first().offset().top - component.offset().top - component.height() + component_offsets.get(component.children("img").attr("id"))
-          // console.log(top_offset, $("#burger img").first().offset().top, component.offset().top, component.height(), component_offsets.get(component.children("img").attr("id")));
-          // component.css("bottom", "initial");
-            // component.animate({"top": "+=" + top_offset + "px", "width": $("#burger img").width() + "px"}, 3000, function()
-            // while(!is_burger_movement_finished)
-            // {
-
-            // }
-
-            setTimeout(function(){component_img.css("z-index", level)}, 200);
-            add_offset += component_offsets.get(component_img.attr("id"));
-            return new Promise(function(){
-
-
-              component_img.animate({"bottom": -add_offset}, 1000, function()
-              {
+        is_burger_movement_finished.then(function(){
+          is_component_movement_finished = new Promise(function(resolve, reject){
 
 
 
-                scores += calories.get(component_img.attr("id"));
-                // for (prev_component of current_components)
-                // {
-                //   add_offset += component_offsets.get(prev_component);
-                // }
-                // $("#burger").children("img").first().before($("<img>", {"src": $(component_img).attr("src"), "class": "flat"}).css({"top": add_offset + "px", "z-index": level}))
-                current_components.push($(component_img).attr("id"))
-                level += 1;
-                // component.css({"top": "initial", "z-index": 1, "width": "100%", "bottom": "-23%"});
-                console.log($("#burger img").first().offset().top);
-              });
+            $("#burger img").first().before(component_img);
+            console.log(component.offset().top);
+            let start_pos = $("#burger img").first().offset().top - component.offset().top;
+            component_img.css("bottom", start_pos);
+            // console.log(component);
+            if(component.attr("id") == "bread-up")
+            {
+              is_game_finished = true;
+            }
+
+            // let top_offset = $("#burger img").first().offset().top - component.offset().top - $("#burger").height() - component.height() - component_offsets.get(component.children("img").attr("id"));
+            // let top_offset = $("#burger img").first().offset().top - component.offset().top - component.height() + component_offsets.get(component.children("img").attr("id"))
+            // console.log(top_offset, $("#burger img").first().offset().top, component.offset().top, component.height(), component_offsets.get(component.children("img").attr("id")));
+            // component.css("bottom", "initial");
+              // component.animate({"top": "+=" + top_offset + "px", "width": $("#burger img").width() + "px"}, 3000, function()
+              // while(!is_burger_movement_finished)
+              // {
+
+              // }
+
+              setTimeout(function(){component_img.css("z-index", level)}, 200);
+              add_offset += component_offsets.get(component_img.attr("id"));
+
+                component_img.animate({"bottom": -add_offset}, 1000, function()
+                {
+
+
+
+                  scores += calories.get(component_img.attr("id"));
+                  // for (prev_component of current_components)
+                  // {
+                  //   add_offset += component_offsets.get(prev_component);
+                  // }
+                  // $("#burger").children("img").first().before($("<img>", {"src": $(component_img).attr("src"), "class": "flat"}).css({"top": add_offset + "px", "z-index": level}))
+                  current_components.push($(component_img).attr("id"))
+                  level += 1;
+                  // component.css({"top": "initial", "z-index": 1, "width": "100%", "bottom": "-23%"});
+                  console.log($("#burger img").first().offset().top);
+                  resolve();
+                });
             });
           });
 
@@ -177,7 +182,6 @@ $(function(){
   {
     return new Promise(function(resolve, reject){
       let offset = $("#burger").offset().left - new_position;
-      is_burger_movement_finished = false;
       $("#burger").stop(true, false).animate({"left": "-=" + offset + "px" }, 1000, function(){
         resolve();
       });
@@ -196,12 +200,14 @@ $(function(){
 
   $(".tube").mouseenter(function(){
     if(is_game_finished) return;
-    is_burger_movement_finished.then(function(){
-      $(this).children(".upside").first().addClass("hovered-tube");
-      let width_diff = $("#burger").width() - $(this).width();
-      let new_position = $(this).offset().left - width_diff / 2;
+    let tube = this;
+    is_component_movement_finished.then(function(){
+      $(tube).children(".upside").first().addClass("hovered-tube");
+      let width_diff = $("#burger").width() - $(tube).width();
+      let new_position = $(tube).offset().left - width_diff / 2;
       is_burger_movement_finished = move_burger(new_position);
     })
+
 
 
 
