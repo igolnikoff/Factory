@@ -8,7 +8,6 @@ $(function(){
     resolve();
   })
   let is_component_move = false;
-  is_component_move
   for(let i = 0; i < wheel_count - 1; ++i)
   {
     $("#wheel-line").append($(".wheel").first().clone());
@@ -54,7 +53,7 @@ $(function(){
 //  $("#line-up").css ("left", (- fitting_offset - 50) + "px")
 
   $('.tube').click(function(){
-    if(is_game_finished || is_component_move) return;
+    if(is_game_finished || is_component_move || !$(this).children(".upside").hasClass("hovered-tube")) return;
     is_component_move = true;
 
     $(".hovered-tube").first().removeClass("hovered-tube");
@@ -94,7 +93,7 @@ $(function(){
               setTimeout(function(){component_img.css("z-index", level)}, 200);
               add_offset += component_offsets.get(component_img.attr("id"));
 
-                component_img.animate({"bottom": -add_offset}, 5000, function()
+                component_img.animate({"bottom": -add_offset}, 1000, function()
                 {
 
 
@@ -185,7 +184,7 @@ $(function(){
   {
     return new Promise(function(resolve, reject){
       let offset = $("#burger").offset().left - new_position;
-      $("#burger").stop(true, false).animate({"left": "-=" + offset + "px" }, 5000, function(){
+      $("#burger").stop(true, false).animate({"left": "-=" + offset + "px" }, 1000, function(){
         resolve();
       });
       if (offset<0)
@@ -202,7 +201,7 @@ $(function(){
 
 
   $(".tube").mouseenter(function(){
-    if(is_game_finished) return;
+    if(is_game_finished || is_component_move) return;
     let tube = this;
     is_component_movement_finished.then(function(){
       $(tube).children(".upside").first().addClass("hovered-tube");
