@@ -8,6 +8,7 @@ $(function(){
     resolve();
   })
   let is_component_move = false;
+  is_component_move
   for(let i = 0; i < wheel_count - 1; ++i)
   {
     $("#wheel-line").append($(".wheel").first().clone());
@@ -53,7 +54,8 @@ $(function(){
 //  $("#line-up").css ("left", (- fitting_offset - 50) + "px")
 
   $('.tube').click(function(){
-    if(is_game_finished) return;
+    if(is_game_finished || is_component_move) return;
+    is_component_move = true;
 
     $(".hovered-tube").first().removeClass("hovered-tube");
     // $(".active-tube").first().removeClass("active-tube");
@@ -92,7 +94,7 @@ $(function(){
               setTimeout(function(){component_img.css("z-index", level)}, 200);
               add_offset += component_offsets.get(component_img.attr("id"));
 
-                component_img.animate({"bottom": -add_offset}, 1000, function()
+                component_img.animate({"bottom": -add_offset}, 5000, function()
                 {
 
 
@@ -108,6 +110,7 @@ $(function(){
                   // component.css({"top": "initial", "z-index": 1, "width": "100%", "bottom": "-23%"});
                   console.log($("#burger img").first().offset().top);
                   resolve();
+                  is_component_move = false;
                 });
             });
           });
@@ -182,7 +185,7 @@ $(function(){
   {
     return new Promise(function(resolve, reject){
       let offset = $("#burger").offset().left - new_position;
-      $("#burger").stop(true, false).animate({"left": "-=" + offset + "px" }, 1000, function(){
+      $("#burger").stop(true, false).animate({"left": "-=" + offset + "px" }, 5000, function(){
         resolve();
       });
       if (offset<0)
