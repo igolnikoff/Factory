@@ -8,6 +8,7 @@ $(function(){
     resolve();
   })
   let is_component_move = false;
+  let last_horeved_tube = null;
   for(let i = 0; i < wheel_count - 1; ++i)
   {
     $("#wheel-line").append($(".wheel").first().clone());
@@ -75,7 +76,7 @@ $(function(){
             let start_pos = $("#burger img").first().offset().top - component.offset().top;
             component_img.css("bottom", start_pos);
             // console.log(component);
-            if(component.attr("id") == "bread-up")
+            if(component_img.attr("id") == "bread-up")
             {
               is_game_finished = true;
             }
@@ -110,6 +111,11 @@ $(function(){
                   console.log($("#burger img").first().offset().top);
                   resolve();
                   is_component_move = false;
+                  if (last_horeved_tube != null)
+                  {
+                    $(last_horeved_tube).trigger("mouseenter");
+                    last_horeved_tube = null;
+                  }
                 });
             });
           });
@@ -129,16 +135,15 @@ $(function(){
           }
         }
         let new_position = $("body").width() + 50;
-        move_burger(new_position);
+        move_burger(new_position).then(function(){
+          $("#burger").css("left", - $("#burger").width() + "px");
+          let new_position = $("body").width() * 3 / 4 - $("#burger").width() / 2;
+          move_burger(new_position);
+        })
         $(".tube-wrapper").animate ({"opacity": 0}, 200, function(){
           $(this).css("display", "none");
           $("#result").css("display", "flex");
-          $("#result").animate({"opacity": 1}, 200, function(){
-            $("#burger").css("left", - $("#burger").width() + "px");
-            let new_position = $("body").width() * 3 / 4 - $("#burger").width() / 2;
-            move_burger(new_position);
-
-          });
+          $("#result").animate({"opacity": 1}, 200);
         });
       });
 
@@ -201,7 +206,11 @@ $(function(){
 
 
   $(".tube").mouseenter(function(){
-    if(is_game_finished || is_component_move) return;
+    if(is_game_finished || is_component_move)
+    {
+      last_horeved_tube = this;
+      return;
+    }
     let tube = this;
     is_component_movement_finished.then(function(){
       $(tube).children(".upside").first().addClass("hovered-tube");
@@ -216,6 +225,7 @@ $(function(){
   });
 
   $(".tube").mouseleave(function(){
+    last_horeved_tube = null;
     if(is_game_finished) return;
     $(this).children(".upside").first().removeClass("hovered-tube");
   });
